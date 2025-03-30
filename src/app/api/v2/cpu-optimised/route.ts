@@ -1,7 +1,10 @@
 // src/app/api/v2/cpu-optimized/route.ts
 import { trace } from '@opentelemetry/api';
+import { NextResponse } from 'next/server';
+import { withMetrics } from '@/lib/with-metrics';
 
-export async function GET(request: Request) {
+
+export async function GEThandler(request: Request) {
   const tracer = trace.getTracer('next-app');
   const span = tracer.startSpan('cpu-operation');
   const url = new URL(request.url);
@@ -55,7 +58,7 @@ export async function GET(request: Request) {
     span.setAttribute('operation.duration_ms', duration);
     span.end();
     
-    return Response.json({ 
+    return NextResponse.json({ 
       result,
       meta: {
         iterations,
@@ -72,9 +75,11 @@ export async function GET(request: Request) {
       message: 'CPU calculation failed'
     });
     
-    return Response.json({ 
+    return NextResponse.json({ 
       error: 'Calculation failed',
       message: error.message
     }, { status: 500 });
   }
 }
+
+export const GET = withMetrics(GEThandler);

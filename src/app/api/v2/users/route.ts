@@ -1,8 +1,10 @@
 // src/app/api/v2/users/route.ts
 import { User, connectToDB } from '@/lib/mongodb';
 import { trace } from '@opentelemetry/api';
+import { NextResponse } from 'next/server';
+import { withMetrics } from '@/lib/with-metrics';
 
-export async function GET(request: Request) {
+export async function GEThandler(request: Request) {
   const tracer = trace.getTracer('next-app');
   const span = tracer.startSpan('get-users');
   const url = new URL(request.url);
@@ -43,7 +45,7 @@ export async function GET(request: Request) {
     });
     
     span.end();
-    return Response.json({ 
+    return NextResponse.json({ 
       users,
       pagination: {
         total: userCount,
@@ -63,7 +65,7 @@ export async function GET(request: Request) {
       message: 'Failed to retrieve users'
     });
     
-    return Response.json({ 
+    return NextResponse.json({ 
       error: 'Failed to retrieve users',
       message: error.message
     }, { status: 500 });
@@ -118,7 +120,7 @@ export async function POST(request: Request) {
     });
     
     span.end();
-    return Response.json({ user: newUser });
+    return NextResponse.json({ user: newUser });
   } catch (error: any) {
     span.recordException(error);
     span.end();
@@ -130,9 +132,11 @@ export async function POST(request: Request) {
       message: 'Failed to create user'
     });
     
-    return Response.json({ 
+    return NextResponse.json({ 
       error: 'Failed to create user',
       message: error.message
     }, { status: 500 });
   }
 }
+
+export const GET = withMetrics(GEThandler);

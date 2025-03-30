@@ -1,7 +1,9 @@
 // src/app/api/v2/external-api/route.ts
 import { trace } from '@opentelemetry/api';
+import { NextResponse } from 'next/server';
+import { withMetrics } from '@/lib/with-metrics';
 
-export async function GET() {
+export async function GEThandler() {
   const tracer = trace.getTracer('next-app');
   const span = tracer.startSpan('external-api-call');
   const requestId = crypto.randomUUID();
@@ -55,7 +57,7 @@ export async function GET() {
     });
     
     span.end();
-    return Response.json({
+    return NextResponse.json({
       data,
       meta: {
         latency,
@@ -76,9 +78,11 @@ export async function GET() {
       message: 'External API call failed'
     });
     
-    return Response.json({ 
+    return NextResponse.json({ 
       error: 'External API call failed',
       message: error.message
     }, { status: 500 });
   }
 }
+
+export const GET = withMetrics(GEThandler);

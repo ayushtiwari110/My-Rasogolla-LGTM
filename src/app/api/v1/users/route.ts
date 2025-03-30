@@ -1,7 +1,9 @@
 // src/app/api/v1/users/route.ts
 import { User, connectToDBBuggy } from '@/lib/mongodb';
+import { withMetrics } from '@/lib/with-metrics';
+import { NextResponse } from 'next/server';
 
-export async function GET() {
+async function GEThandler() {
   try {
     // No timeout handling
     await connectToDBBuggy();
@@ -12,14 +14,14 @@ export async function GET() {
     // Simulate slow processing
     await new Promise(resolve => setTimeout(resolve, Math.random() * 2000));
     
-    return Response.json({ users });
+    return NextResponse.json({ users });
   } catch (error: any) {
     // Poor error handling - doesn't log properly
-    return Response.json({ error: 'Database error' }, { status: 500 });
+    return NextResponse.json({ error: 'Database error' }, { status: 500 });
   }
 }
 
-export async function POST(request: Request) {
+async function POSThandler(request: Request) {
   try {
     await connectToDBBuggy();
     
@@ -29,8 +31,11 @@ export async function POST(request: Request) {
     // No timeout set
     await newUser.save();
     
-    return Response.json({ user: newUser });
+    return NextResponse.json({ user: newUser });
   } catch (error) {
-    return Response.json({ error: 'Failed to create user' }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to create user' }, { status: 500 });
   }
 }
+
+export const GET = withMetrics(GEThandler);
+export const POST = withMetrics(POSThandler);

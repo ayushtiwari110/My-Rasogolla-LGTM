@@ -1,5 +1,8 @@
 // src/app/api/v1/cpu-intensive/route.ts
-export async function GET() {
+import { NextResponse } from 'next/server';
+import { withMetrics } from '@/lib/with-metrics';
+
+export async function GEThandler() {
     try {
       // CPU-intensive operation with no optimization
       let result = 0;
@@ -7,9 +10,10 @@ export async function GET() {
         result += Math.sqrt(i) * Math.random();
       }
       
-      return Response.json({ result });
+      return NextResponse.json({ result });
     } catch (error) {
-      return Response.json({ error: 'Calculation failed' }, { status: 500 });
+      return NextResponse.json({ error: 'Calculation failed' }, { status: 500 });
     }
-  }
+}
   
+export const GET = withMetrics(GEThandler);
