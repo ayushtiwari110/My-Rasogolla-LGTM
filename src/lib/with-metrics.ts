@@ -15,8 +15,7 @@ export function withMetrics<T = any>(handler: Handler<T>) {
     
     // Extract route pattern from pathname
     const route = url.pathname
-      .replace(/\/api\/v[12]\//, '/api/[version]/') // Handle versioned routes
-      .replace(/\/(\d+)/g, '/[id]') // Replace numeric IDs
+      .replace(/\/(\d+)(?!v\d)/g, '/[id]') // Replace numeric IDs, but don't match version numbers
       .replace(/\/([a-f0-9-]{20,})/g, '/[slug]'); // Replace UUIDs/slugs
 
     try {

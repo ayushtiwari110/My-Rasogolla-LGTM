@@ -2,7 +2,6 @@
 // Using dynamic import for node-fetch
 import('node-fetch').then(fetchModule => {
   const fetch = fetchModule.default;
-  runLoadTestWithFetch(fetch);
 }).catch(console.error);
 
 // Configuration
@@ -17,7 +16,7 @@ const API_PATHS = [
   '/api/v1/external-api',
   '/api/v2/external-api',
   '/api/v1/cpu-intensive',
-  '/api/v2/cpu-optimized'
+  '/api/v2/cpu-optimised'
 ];
 
 // Random delay between min and max ms
