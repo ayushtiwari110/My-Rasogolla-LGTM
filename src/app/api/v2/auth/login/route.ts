@@ -1,6 +1,9 @@
 // src/app/api/v2/auth/login/route.ts
 import { trace } from '@opentelemetry/api';
 import crypto from 'crypto';
+import { NextResponse } from 'next/server';
+import { withMetrics } from '@/lib/with-metrics';
+
 
 // Better store (still in-memory but with proper password storage)
 const usersSecure = [
@@ -12,7 +15,7 @@ const usersSecure = [
   }
 ];
 
-export async function POST(request: Request) {
+export async function POSThandler(request: Request) {
   const tracer = trace.getTracer('next-app');
   const span = tracer.startSpan('user-login');
   const requestId = crypto.randomUUID();
@@ -63,7 +66,7 @@ export async function POST(request: Request) {
       });
       
       span.end();
-      return Response.json({ error: 'Invalid credentials' }, { status: 401 });
+      return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
     }
     
     // Generate proper JWT (in real app)
@@ -83,7 +86,7 @@ export async function POST(request: Request) {
     });
     
     span.end();
-    return Response.json({ 
+    return NextResponse.json({ 
       token,
       expiresIn: 3600,
       userId: user.id
@@ -99,9 +102,11 @@ export async function POST(request: Request) {
       message: 'Login failed'
     });
     
-    return Response.json({ 
+    return NextResponse.json({ 
       error: 'Login failed',
       message: error.message
     }, { status: 500 });
   }
 }
+
+export const POST = withMetrics(POSThandler);

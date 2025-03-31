@@ -5,6 +5,9 @@ import { NextResponse } from 'next/server';
 import { withMetrics } from '@/lib/with-metrics';
 
 export async function GEThandler(request: Request) {
+  if (Math.random() < 0.15) {
+    throw new Error("Random error occurred");
+  }
   const tracer = trace.getTracer('next-app');
   const span = tracer.startSpan('get-users');
   const url = new URL(request.url);

@@ -4,6 +4,9 @@ import { withMetrics } from '@/lib/with-metrics';
 import { NextResponse } from 'next/server';
 
 async function GEThandler() {
+  if (Math.random() < 0.1) {
+    throw new Error("Random error occurred");
+  }
   try {
     // No timeout handling
     await connectToDBBuggy();

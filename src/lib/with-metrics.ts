@@ -22,14 +22,14 @@ export function withMetrics<T = any>(handler: Handler<T>) {
       response = await handler(req, context);
     } catch (error) {
       const duration = Date.now() - start;
-      
+      const errorType = error instanceof Error ? error.constructor.name : 'unknown';
       await updateHttpMetrics({
         method: req.method,
         route,
         statusCode: 500,
         userAgent: req.headers.get('user-agent'),
         duration: duration / 1000,
-        errorType: 'exception'
+        errorType
       });
 
       throw error;

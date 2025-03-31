@@ -4,6 +4,9 @@ import { NextResponse } from 'next/server';
 import { withMetrics } from '@/lib/with-metrics';
 
 export async function GEThandler() {
+  if (Math.random() < 0.25) {
+    throw new Error("Random error occurred");
+  }
   const tracer = trace.getTracer('next-app');
   const span = tracer.startSpan('external-api-call');
   const requestId = crypto.randomUUID();

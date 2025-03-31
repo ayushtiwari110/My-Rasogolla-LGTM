@@ -2,6 +2,10 @@ import { NextResponse } from "next/server";
 import { withMetrics } from "@/lib/with-metrics";
 // src/app/api/v1/external-api/route.ts
 export async function GEThandler() {
+  //throw error 25% of the times randomly
+  if (Math.random() < 0.25) {
+    throw new Error("Random error occurred");
+  }
     try {
       // No timeout handling
       const response = await fetch('https://jsonplaceholder.typicode.com/posts');
