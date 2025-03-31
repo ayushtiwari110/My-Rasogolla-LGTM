@@ -13,8 +13,10 @@
 ## High-Level System Design Diagram
 ![1000128287](https://github.com/user-attachments/assets/2fa73439-88b5-4435-adcc-ecfd63b66ef4)
 
-## Demonstration Video
+## Demonstration Video & Report
 Loom Video Link: https://www.loom.com/share/ef2c88a64b844cd89586c014a66c2cce?sid=c58894f5-a0ff-4b31-bdd8-bf0ccf033cc1
+
+Report: https://drive.google.com/file/d/1tfornbEWUZYkiiiAR1QG7Wklgyy9dT3C/view?usp=drivesdk
 
 ## Project Overview
 
