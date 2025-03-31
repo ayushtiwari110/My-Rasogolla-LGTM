@@ -1,74 +1,168 @@
-# A statically generated blog example using Next.js, Markdown, and TypeScript
+# Atlan Observability Challenge Solution
 
-This is the existing [blog-starter](https://github.com/vercel/next.js/tree/canary/examples/blog-starter) plus TypeScript.
+## Performance Dashboard
+![Screenshot 2025-03-31 215055](https://github.com/user-attachments/assets/8734c766-d713-4e2b-930c-60504cb16526)
+![Screenshot 2025-03-31 215109](https://github.com/user-attachments/assets/ff193762-639e-4978-b26b-7d71d4fea2e7)
+![Screenshot 2025-03-31 215120](https://github.com/user-attachments/assets/f4aa2e91-cd43-4274-a51a-37e262a22fd2)
+![Screenshot 2025-03-31 215132](https://github.com/user-attachments/assets/35d6dd6e-27f5-40b9-a34f-13a9240eb0e4)
 
-This example showcases Next.js's [Static Generation](https://nextjs.org/docs/app/building-your-application/routing/layouts-and-templates) feature using Markdown files as the data source.
+## NodeJS Runtime Dashboard
+![Screenshot 2025-03-31 215320](https://github.com/user-attachments/assets/3878a40f-eb6d-48a8-bd36-674903b4ef34)
+![Screenshot 2025-03-31 215327](https://github.com/user-attachments/assets/5605aa4a-0c23-40b9-9aad-40523fe2699c)
 
-The blog posts are stored in `/_posts` as Markdown files with front matter support. Adding a new Markdown file in there will create a new blog post.
 
-To create the blog posts we use [`remark`](https://github.com/remarkjs/remark) and [`remark-html`](https://github.com/remarkjs/remark-html) to convert the Markdown files into an HTML string, and then send it down as a prop to the page. The metadata of every post is handled by [`gray-matter`](https://github.com/jonschlinkert/gray-matter) and also sent in props to the page.
 
-## Demo
+## Project Overview
 
-[https://next-blog-starter.vercel.app/](https://next-blog-starter.vercel.app/)
+This project demonstrates a comprehensive observability solution built for Atlan's Platform Engineering Internship Challenge 2025. The solution addresses the problem of slow, inconsistent, and manual debugging experiences faced by engineering teams.
 
-## Deploy your own
+The application showcases how proper observability practices can transform debugging from a painful process dependent on senior engineers to a data-driven, accessible workflow for all team members.
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/blog-starter)
+## Key Features
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/next.js/tree/canary/examples/blog-starter&project-name=blog-starter&repository-name=blog-starter)
+- **Dual Implementation Approach**: Contrasting v1 (buggy) and v2 (optimized) API endpoints to demonstrate performance differences
+- **Multi-dimensional Observability**: Integrated metrics, logging, and distributed tracing
+- **Business Impact Visualization**: Connecting technical metrics to business outcomes
+- **Performance Comparison**: Real-time dashboards showing 71% improvement between implementations
+- **Resource Utilization Tracking**: CPU and memory usage monitoring
 
-### Related examples
 
-- [AgilityCMS](/examples/cms-agilitycms)
-- [Builder.io](/examples/cms-builder-io)
-- [ButterCMS](/examples/cms-buttercms)
-- [Contentful](/examples/cms-contentful)
-- [Cosmic](/examples/cms-cosmic)
-- [DatoCMS](/examples/cms-datocms)
-- [DotCMS](/examples/cms-dotcms)
-- [Drupal](/examples/cms-drupal)
-- [Enterspeed](/examples/cms-enterspeed)
-- [Ghost](/examples/cms-ghost)
-- [GraphCMS](/examples/cms-graphcms)
-- [Kontent.ai](/examples/cms-kontent-ai)
-- [MakeSwift](/examples/cms-makeswift)
-- [Payload](/examples/cms-payload)
-- [Plasmic](/examples/cms-plasmic)
-- [Prepr](/examples/cms-prepr)
-- [Prismic](/examples/cms-prismic)
-- [Sanity](/examples/cms-sanity)
-- [Sitecore XM Cloud](/examples/cms-sitecore-xmcloud)
-- [Sitefinity](/examples/cms-sitefinity)
-- [Storyblok](/examples/cms-storyblok)
-- [TakeShape](/examples/cms-takeshape)
-- [Tina](/examples/cms-tina)
-- [Umbraco](/examples/cms-umbraco)
-- [Umbraco heartcore](/examples/cms-umbraco-heartcore)
-- [Webiny](/examples/cms-webiny)
-- [WordPress](/examples/cms-wordpress)
-- [Blog Starter](/examples/blog-starter)
+## Technology Stack
 
-## How to use
+### Core Framework
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
+- **Next.js**: Full-stack React framework with API routes
 
+
+### Observability Tools
+
+- **Prometheus** (via prom-client): Metrics collection and storage
+- **Grafana**: Data visualization and dashboards
+- **Loki**: Log aggregation (with Pino integration)
+- **Zipkin**: Distributed tracing
+- **OpenTelemetry**: Cross-service instrumentation
+
+
+### Data Storage
+
+- **MongoDB**: Document database (for user data)
+- **Mongoose**: MongoDB object modeling
+
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- Docker and Docker Compose
+- MongoDB (local or Atlas)
+
+
+### Installation
+
+1. Clone the repository:
 ```bash
-npx create-next-app --example blog-starter blog-starter-app
+git clone https://github.com/yourusername/atlan-observability.git
+cd atlan-observability
 ```
 
+2. Install dependencies:
 ```bash
-yarn create next-app --example blog-starter blog-starter-app
+npm install
 ```
 
-```bash
-pnpm create next-app --example blog-starter blog-starter-app
+3. Set up environment variables:
+```
+# Create a .env.local file with:
+MONGODB_URI=mongodb://localhost:27017/atlan-obs
 ```
 
-Your blog should be up and running on [http://localhost:3000](http://localhost:3000)! If it doesn't work, post on [GitHub discussions](https://github.com/vercel/next.js/discussions).
+4. Start the observability stack:
+```bash
+docker-compose up -d
+```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+5. Run the application:
+```bash
+npm run dev
+```
 
-# Notes
+6. Access the services:
+    - Application: http://localhost:3000
+    - Grafana: http://localhost:3001 (admin/admin)
+    - Prometheus: http://localhost:9090
+    - Zipkin: http://localhost:9411
+    - Loki: http://localhost:3100
 
-`blog-starter` uses [Tailwind CSS](https://tailwindcss.com) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3).
+
+## Available API Endpoints
+
+### V1 Endpoints (Buggy)
+
+- `/api/v1/users` - Inefficient user data fetching
+- `/api/v1/memory-leak` - Demonstrates memory leaks
+- `/api/v1/external-api` - Unoptimized external API calls
+- `/api/v1/cpu-intensive` - CPU-heavy operations
+
+
+### V2 Endpoints (Optimized)
+
+- `/api/v2/users` - Efficient user data fetching with pagination
+- `/api/v2/memory-efficient` - Memory usage optimization
+- `/api/v2/external-api` - Improved external API integration
+- `/api/v2/cpu-optimised` - Optimized CPU operations
+
+
+## Dashboard Components
+
+The Grafana dashboard is organized into several sections:
+
+1. **Business Impact**
+    - User signups by plan type
+    - Referral source tracking
+    - Login success rate
+    - Estimated revenue impact
+2. **Resource Utilization**
+    - CPU usage
+    - Memory consumption
+3. **API Performance**
+    - Response time comparison (p95)
+    - Error rates by endpoint
+    - Request volume metrics
+4. **External API Dependencies**
+    - External service latency
+    - Error tracking
+5. **User Experience \& SLO Tracking**
+    - Performance improvement metrics
+    - Traffic volume analysis
+
+## Load Testing
+
+The project includes a load testing script to generate realistic traffic patterns:
+
+```bash
+node scripts/load-test.js
+```
+
+This script simulates user traffic to both v1 and v2 endpoints, helping visualize performance differences in real-time.
+
+## Dependencies
+
+- **@opentelemetry/api**: OpenTelemetry API for distributed tracing
+- **@vercel/otel**: Vercel's OpenTelemetry integration
+- **pino \& pino-loki**: Structured logging with Loki integration
+- **prom-client**: Prometheus client for metrics collection
+- **mongodb \& mongoose**: MongoDB integration
+- **node-fetch**: HTTP client for external API calls
+
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+- Atlan for providing the observability challenge
+- The open source community for the excellent observability tools
+
+---
