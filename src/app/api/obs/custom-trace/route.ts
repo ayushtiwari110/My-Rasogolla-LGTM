@@ -17,5 +17,9 @@ export async function GET() {
     span.recordException(error as Error);
     span.setStatus({ code: SpanStatusCode.ERROR });
     span.end();
+    return Response.json(
+      { error: 'Operation failed' }, 
+      { status: 500 }
+    );
   }
 }

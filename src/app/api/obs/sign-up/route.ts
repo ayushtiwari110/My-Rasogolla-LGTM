@@ -1,8 +1,13 @@
 export async function GET() {
+  // randomly select plan_type and referral_source
+  const planTypes = ["free", "paid"];
+  const referralSources = ["twitter", "linkedin", "google"];
+  const randomPlanType = planTypes[Math.floor(Math.random() * planTypes.length)];
+  const randomReferralSource = referralSources[Math.floor(Math.random() * referralSources.length)];
     try {
       globalThis.metrics?.userSignups.inc({
-        plan_type: "free",
-        referral_source: "direct"
+        plan_type: randomPlanType,
+        referral_source: randomReferralSource
       });
   
       return Response.json({
