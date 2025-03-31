@@ -10,7 +10,11 @@
 ![Screenshot 2025-03-31 215320](https://github.com/user-attachments/assets/3878a40f-eb6d-48a8-bd36-674903b4ef34)
 ![Screenshot 2025-03-31 215327](https://github.com/user-attachments/assets/5605aa4a-0c23-40b9-9aad-40523fe2699c)
 
+## High-Level System Design Diagram
+![1000128287](https://github.com/user-attachments/assets/2fa73439-88b5-4435-adcc-ecfd63b66ef4)
 
+## Demonstration Video
+Loom Video Link: https://www.loom.com/share/ef2c88a64b844cd89586c014a66c2cce?sid=c58894f5-a0ff-4b31-bdd8-bf0ccf033cc1
 
 ## Project Overview
 
