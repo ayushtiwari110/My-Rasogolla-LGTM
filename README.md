@@ -75,6 +75,9 @@ npm install
 ```
 # Create a .env.local file with:
 MONGODB_URI=mongodb://localhost:27017/atlan-obs
+OTEL_SERVICE_NAME="nextjs-app"
+OTEL_LOG_LEVEL="info"
+
 ```
 
 4. Start the observability stack:
